@@ -20,12 +20,14 @@ def emotion():
             try:
                 analyze = DeepFace.analyze(frame, prog_bar=False)
                 user_emotion = analyze['dominant_emotion']
-                # print(user_emotion)
-                return user_emotion
+                img = cv2.putText(frame, user_emotion, (50, 50), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2, cv2.LINE_4)
+                print(user_emotion)
+                # return user_emotion
             except:
+                img = cv2.putText(frame, 'Face not detected', (50, 50), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2, cv2.LINE_4)
                 print("No face detected")
         cv2.imshow('video', frame)
-        if cv2.waitKey(1) == ord('q'):
+        if (cv2.waitKey(1) == ord('q')) or (cv2.waitKey(1) == ord('Q')):
             break
             cam.release()
 
